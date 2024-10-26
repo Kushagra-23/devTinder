@@ -1,30 +1,27 @@
-const express = require('express');
+const express = require("express");
 
 const app = express();
 
-// app.use('/route', rH1, [rH2, rH3], rH4, rH5);
+// GET /users => middleware chains => request handler
 
-app.use("/user", (req, res, next) => {
-  console.log("first")
+app.use("/", (req, res, next) => {
+  // Middleware
+  console.log("Handling / route");
   next();
-},
-(req, res, next) => {
-  console.log("second")
-  next();
-},
-(req, res, next) => {
-  console.log("third")
-  next();
-},
-(req, res, next) => {
-  console.log("fourth")
-  next();
-},
-(req, res, next) => {
-  console.log("fifth")
-  res.send("5") 
-})
+});
+app.get(
+  "/user",
+  (req, res, next) => {
+    // Middleware
+    console.log("Handling /user 1 route");
+    next();
+  },
+  (req, res, next) => {
+    console.log("Handling /user 2 route");
+    res.send("user");
+  }
+);
 
 app.listen(3000, () => {
-  console.log("SERVER RUNNING")
-})
+  console.log("SERVER RUNNING");
+});
