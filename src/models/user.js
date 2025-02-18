@@ -60,11 +60,22 @@ const userSchema = new mongoose.Schema(
     },
     about: {
       type: String,
-      default: "This is random default value",
       maxLength: 150,
     },
     skills: {
       type: [String],
+    },
+    designation: {
+      type: String,
+      maxLength: 150,
+    },
+    experience: {
+      type: Number,
+      maxLength: 150,
+    },
+    company: {
+      type: String,
+      maxLength: 150,
     },
   },
   {

@@ -27,7 +27,7 @@ authRouter.post("/signup", async (req, res) => {
     });
     res.json({ message: "User added successfully", data: savedUser });
   } catch (error) {
-    res.status(400).send("ERROR : " + error.message);
+    res.status(400).json({ message: error.message });
   }
 });
 
@@ -49,20 +49,24 @@ authRouter.post("/login", async (req, res) => {
       res.cookie("token", token, {
         expires: new Date(Date.now() + 8 + 36000000),
       });
-      res.send(user);
+      res.json({ message: "Login successfully", data: user });
     } else {
       throw new Error("Invalid credentials");
     }
   } catch (error) {
-    res.status(400).send("ERROR : " + error.message);
+    res.status(400).json({ message: error.message });
   }
 });
 
 authRouter.post("/logout", async (req, res) => {
-  res.cookie("token", null, {
-    expires: new Date(Date.now()),
-  });
-  res.send("Logout Successful");
+  try {
+    res.cookie("token", null, {
+      expires: new Date(Date.now()),
+    });
+    res.json({ message: "Logout Successful" });
+  } catch (error) {
+    res.status(400).json({ message: error.message });
+  }
 });
 
 module.exports = authRouter;
