@@ -24,7 +24,7 @@ app.use("/", userRouter);
 connectDB()
   .then(() => {
     console.log("Database connection success");
-    app.listen(3000, () => {
+    app.listen(7777, () => {
       console.log("SERVER RUNNING");
     });
   })
